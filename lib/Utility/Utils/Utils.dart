@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:ui';
+
 import 'package:autostore/Utility/extenshions/extenshion.dart';
 import 'package:autostore/res/routes/routes_names.dart';
 import 'package:flutter/material.dart';
@@ -123,5 +125,69 @@ class Utils {
   static String convertDate(var date) {
     DateTime dateTime = DateTime.parse(date);
     return DateFormat('MMMM:dd:yyyy').format(dateTime).toString();
+  }
+
+  // Blur Dialog For LogOut
+  static showBlurDialog(BuildContext context, VoidCallback ontap) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: AlertDialog(
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  MaterialButton(
+                    color: AppColor.redColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    onPressed: ontap,
+                    child: Text(
+                      'Yes',
+                      style: GoogleFonts.poppins(color: AppColor.whiteColor),
+                    ),
+                  ),
+                  0.02.pw,
+                  MaterialButton(
+                    color: AppColor.geryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No',
+                        style: GoogleFonts.poppins(color: AppColor.whiteColor)),
+                  ),
+                ],
+              )
+            ],
+            backgroundColor: AppColor.whiteColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            title: Center(
+              child: Text('LogOut',
+                  style: GoogleFonts.poppins(
+                      color: AppColor.redColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
+            ),
+            contentTextStyle: const TextStyle(overflow: TextOverflow.ellipsis),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Text('Are You Sure',
+                      style: GoogleFonts.poppins(
+                          color: AppColor.redColor, fontSize: 17)),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

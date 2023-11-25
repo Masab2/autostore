@@ -1,4 +1,5 @@
 import 'package:autostore/Utility/Colors/AppColor.dart';
+import 'package:autostore/Utility/Utils/Utils.dart';
 import 'package:autostore/Utility/extenshions/extenshion.dart';
 import 'package:autostore/res/components/HomeComponents/HomeAppBar.dart';
 import 'package:autostore/res/components/UserInfoTabComponents/listTitleContanier.dart';
@@ -122,18 +123,10 @@ class _UserAccountState extends State<UserAccount> {
                   0.02.ph,
                   ListTileContainer(
                     ontap: () {
-                      Get.defaultDialog(
-                        title: 'Log Out',
-                        middleText: 'Are you Sure you want to cancel',
-                        textConfirm: 'Yes',
-                        textCancel: 'Cancel',
-                        backgroundColor: AppColor.whiteColor,
-                        buttonColor: AppColor.redColor,
-                        onConfirm: () {
-                          logOutController.logOutAccount();
-                          Get.back();
-                        },
-                      );
+                      Utils.showBlurDialog(context, () {
+                        // logOutController.logOutAccount();
+                        Get.back();
+                      });
                     },
                     title: 'LogOut',
                     icon: Icons.logout,
